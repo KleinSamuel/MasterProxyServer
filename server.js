@@ -3,6 +3,8 @@ const http = require("http");
 const https = require("https");
 const httpProxy = require("http-proxy");
 
+https.globalAgent.options.ca = require("ssl-root-cas/latest").create();
+
 var config = require("./master.config");
 
 var URL = config.url;
