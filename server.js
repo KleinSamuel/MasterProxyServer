@@ -58,5 +58,5 @@ https.createServer(options, function(req, res){
     res.end("<h1 style='margin-left:40%;margin-top:200px;'>404 Page Not Found</h1>");
   }
 }).listen(PORT_HTTPS, function(){
-  console.log("[ INFO ] HTTPS Server running on port <"+PORT_HTTPS+">");
+  console.log("[ INFO ] HTTPS Master Server running on port <"+PORT_HTTPS+">");
 });
