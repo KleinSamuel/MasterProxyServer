@@ -15,14 +15,14 @@ var options = {
 };
 
 var proxy_http = httpProxy.createProxyServer({});
-var proxy_https = httpProxy.createProxyServer({
+/*var proxy_https = httpProxy.createProxyServer({
   ssl: {
     key: options.key,
     cert: options.cert
   },
   //target: "https://"+URL+":"+PORT_HTTPS,
   secure: true
-});
+});*/
 
 var server_http = http.createServer(function(req, res){
   var subdomain = req.headers.host.split(".")[0];
