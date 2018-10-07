@@ -20,7 +20,7 @@ var proxy_https = httpProxy.createProxyServer({
     key: config.key,
     cert: config.cert
   },
-  target: "https://"+URL+":"+PORT_HTTPS,
+  //target: "https://"+URL+":"+PORT_HTTPS,
   secure: true
 });
 
@@ -51,7 +51,7 @@ var server_https = https.createServer(options, function(req, res){
   for(var i in config.websites){
     var website = config.websites[i];
     if(subdomain == website.subdomain){
-      proxy_http.web(req, res, {target: "https://"+URL+":"+website.port_https});
+      proxy_https.web(req, res, {target: "https://"+URL+":"+website.port_https});
       flag = true;
       break;
     }
