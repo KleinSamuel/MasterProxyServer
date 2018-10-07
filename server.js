@@ -47,7 +47,7 @@ server_http.listen(PORT_HTTP, function(){
 
 https.createServer(options, function(req, res){
   console.log("Got Request");
-  res.send({status:"Lel ok"});
+  res.end("<h1 style='margin-left:40%;margin-top:200px;'>Hello World</h1>");
 }).listen(PORT_HTTPS, function(){
   console.log("[ INFO ] HTTPS Server running on port <"+PORT_HTTPS+">");
 });
