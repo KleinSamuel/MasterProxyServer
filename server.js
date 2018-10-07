@@ -46,8 +46,21 @@ server_http.listen(PORT_HTTP, function(){
 });
 
 https.createServer(options, function(req, res){
-  console.log("Got Request");
-  res.end("<h1 style='margin-left:40%;margin-top:200px;'>Hello World</h1>");
+  var subdomain = req.headers.host.split(".")[0];
+  var flag = false;
+  for(var i in config.websites){
+    var website = config.websites[i];
+    if(subdomain == website.subdomain){
+      //proxy_http.web(req, res, {target: "https://"+URL+":"+website.port_https});
+      //flag = true;
+      console.log("Subdomain found:\t"+subdomain);
+      break;
+    }
+  }
+  if(!flag){
+    res.statusCode = 404;
+    res.end("<h1 style='margin-left:40%;margin-top:200px;'>404 Page Not Found</h1>");
+  }
 }).listen(PORT_HTTPS, function(){
   console.log("[ INFO ] HTTPS Server running on port <"+PORT_HTTPS+">");
 });
