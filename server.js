@@ -20,7 +20,7 @@ var proxy_https = httpProxy.createProxyServer({
     key: options.key,
     cert: options.cert
   },
-  secure: true
+  secure: false
 });
 
 http.createServer(function(req, res){
