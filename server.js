@@ -3,8 +3,6 @@ const http = require("http");
 const https = require("https");
 const httpProxy = require("http-proxy");
 
-https.globalAgent.options.ca = require("ssl-root-cas/latest").create();
-
 var config = require("./master.config");
 
 var URL = config.url;
@@ -47,6 +45,13 @@ server_http.listen(PORT_HTTP, function(){
   console.log("[ INFO ] HTTP Master Server running on port <"+PORT_HTTP+">");
 });
 
+https.createServer(options, function(req, res){
+  console.log("Got Request");
+}).listen(PORT_HTTPS, function(){
+  console.log("[ INFO ] HTTPS Server running on port <"+PORT_HTTPS+">");
+});
+
+/*
 var server_https = https.createServer(options, function(req, res){
   var subdomain = req.headers.host.split(".")[0];
   var flag = false;
@@ -67,3 +72,4 @@ var server_https = https.createServer(options, function(req, res){
 server_https.listen(PORT_HTTPS, function(){
   console.log("[ INFO ] HTTPS Master Server running on port <"+PORT_HTTPS+">");
 });
+*/
