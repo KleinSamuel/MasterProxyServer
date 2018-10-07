@@ -20,11 +20,10 @@ var proxy_https = httpProxy.createProxyServer({
     key: options.key,
     cert: options.cert
   },
-  //target: "https://"+URL+":"+PORT_HTTPS,
   secure: false
 });
 
-var server_http = http.createServer(function(req, res){
+http.createServer(function(req, res){
   var subdomain = req.headers.host.split(".")[0];
   var flag = false;
   for(var i in config.websites){
@@ -39,9 +38,7 @@ var server_http = http.createServer(function(req, res){
     res.statusCode = 404;
     res.end("<h1 style='margin-left:40%;margin-top:200px;'>404 Page Not Found</h1>");
   }
-});
-
-server_http.listen(PORT_HTTP, function(){
+}).listen(PORT_HTTP, function(){
   console.log("[ INFO ] HTTP Master Server running on port <"+PORT_HTTP+">");
 });
 
@@ -53,7 +50,6 @@ https.createServer(options, function(req, res){
     if(subdomain == website.subdomain){
       proxy_https.web(req, res, {target: "https://"+URL+":"+website.port_https});
       flag = true;
-      console.log("Subdomain found:\t"+subdomain);
       break;
     }
   }
@@ -64,26 +60,3 @@ https.createServer(options, function(req, res){
 }).listen(PORT_HTTPS, function(){
   console.log("[ INFO ] HTTPS Server running on port <"+PORT_HTTPS+">");
 });
-
-/*
-var server_https = https.createServer(options, function(req, res){
-  var subdomain = req.headers.host.split(".")[0];
-  var flag = false;
-  for(var i in config.websites){
-    var website = config.websites[i];
-    if(subdomain == website.subdomain){
-      proxy_http.web(req, res, {target: "https://"+URL+":"+website.port_https});
-      flag = true;
-      break;
-    }
-  }
-  if(!flag){
-    res.statusCode = 404;
-    res.end("<h1 style='margin-left:40%;margin-top:200px;'>404 Page Not Found</h1>");
-  }
-});
-
-server_https.listen(PORT_HTTPS, function(){
-  console.log("[ INFO ] HTTPS Master Server running on port <"+PORT_HTTPS+">");
-});
-*/
