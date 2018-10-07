@@ -10,8 +10,8 @@ var PORT_HTTP = config.port_http;
 var PORT_HTTPS = config.port_https;
 
 var options = {
-  key: fs.readFileSync(config.key, "utf-8"),
-  cert: fs.readFileSync(config.cert, "utf-8")
+  key: fs.readFileSync(config.ssh_key, "utf-8"),
+  cert: fs.readFileSync(config.ssh_cert, "utf-8")
 };
 
 var proxy_http = httpProxy.createProxyServer({});
