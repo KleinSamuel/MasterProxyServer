@@ -10,15 +10,15 @@ var PORT_HTTP = config.port_http;
 var PORT_HTTPS = config.port_https;
 
 var options = {
-  key: config.key,
-  cert: config.cert
+  key: fs.readFileSync(config.key),
+  cert: fs.readFileSync(config.cert)
 };
 
 var proxy_http = httpProxy.createProxyServer({});
 var proxy_https = httpProxy.createProxyServer({
   ssl: {
-    key: config.key,
-    cert: config.cert
+    key: options.key,
+    cert: options.cert
   },
   //target: "https://"+URL+":"+PORT_HTTPS,
   secure: true
@@ -51,7 +51,7 @@ var server_https = https.createServer(options, function(req, res){
   for(var i in config.websites){
     var website = config.websites[i];
     if(subdomain == website.subdomain){
-      proxy_https.web(req, res, {target: "https://"+URL+":"+website.port_https});
+      proxy_http.web(req, res, {target: "https://"+URL+":"+website.port_https});
       flag = true;
       break;
     }
