@@ -51,7 +51,7 @@ https.createServer(options, function(req, res){
   for(var i in config.websites){
     var website = config.websites[i];
     if(subdomain == website.subdomain){
-      proxy_https.web(req, res, {target: "http://"+URL+":"+website.port_http});
+      proxy_https.web(req, res, {target: "https://"+URL+":"+website.port_https});
       flag = true;
       console.log("Subdomain found:\t"+subdomain);
       break;
