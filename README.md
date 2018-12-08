@@ -3,6 +3,11 @@ Local HTTP/HTTPS proxy server to route subdomains to specific services running o
 
 Used to manage the routing of multiple services running on the same server but on different ports without the need of configuring the DNS settings of the domain.
 
+### Dependencies
+- `NodeJS` NodeJS version v8.12.0
+- `http-proxy` NodeJS module v1.17.0
+- `https` NodeJS module v1.0.0
+
 ### Config
 - `url` main url of the server
 - `port_http` http port the server is listening to
