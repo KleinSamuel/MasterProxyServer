@@ -1,0 +1,12 @@
+[Unit]
+Description=ROT13 demo service
+After=network.target
+StartLimitIntervalSec=0[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=sam
+ExecStart=/usr/local/bin/node /home/sam/Projects/MasterProxyServer/server.js
+
+[Install]
+WantedBy=multi-user.target
