@@ -34,16 +34,15 @@ const proxy_https = httpProxy.createProxyServer({
 http.createServer(function(req, res) {
 
     let subdomain = req.headers.host.split(".")[0];
+    if (subdomain === "www"){
+        subdomain = req.headers.host.split(".")[1];
+    }
     let flag = false;
 
     for (let i in config.websites) {
         let website = config.websites[i];
         if (subdomain === website.subdomain) {
-            let newUrl = "http://"+URL+":"+website.port_http;
-            if (website.appendix !== undefined){
-                newUrl += "/"+website.appendix;
-            }
-            proxy_http.web(req, res, {target: newUrl});
+            proxy_http.web(req, res, {target: "http://"+URL+":"+website.port_http});
             flag = true;
             break;
         }
