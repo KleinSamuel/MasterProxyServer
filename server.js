@@ -36,17 +36,12 @@ http.createServer(function(req, res) {
     let subdomain = req.headers.host.split(".")[0];
     let flag = false;
 
-    if (subdomain === URL.split(".")[0]) {
-        proxy_http.web(req, res, {target: "http://"+URL});
-        flag = true;
-    } else {
-        for (let i in config.websites) {
-            let website = config.websites[i];
-            if (subdomain === website.subdomain) {
-                proxy_http.web(req, res, {target: "http://"+URL+":"+website.port_http});
-                flag = true;
-                break;
-            }
+    for (let i in config.websites) {
+        let website = config.websites[i];
+        if (subdomain === website.subdomain) {
+            proxy_http.web(req, res, {target: "http://"+URL+":"+website.port_http});
+            flag = true;
+            break;
         }
     }
 
@@ -64,17 +59,12 @@ https.createServer(options, function(req, res){
     let subdomain = req.headers.host.split(".")[0];
     let flag = false;
 
-    if (subdomain === URL.split(".")[0]) {
-        proxy_http.web(req, res, {target: "http://"+URL});
-        flag = true;
-    } else {
-        for (let i in config.websites) {
-            let website = config.websites[i];
-            if (subdomain === website.subdomain) {
-                proxy_https.web(req, res, {target: "https://"+URL+":"+website.port_https});
-                flag = true;
-                break;
-            }
+    for (let i in config.websites) {
+        let website = config.websites[i];
+        if (subdomain === website.subdomain) {
+            proxy_https.web(req, res, {target: "https://"+URL+":"+website.port_https});
+            flag = true;
+            break;
         }
     }
 
