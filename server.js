@@ -36,7 +36,7 @@ http.createServer(function(req, res) {
     let subdomain = req.headers.host.split(".")[0];
     let flag = false;
 
-    if (subdomain === URL) {
+    if (subdomain === URL.split(".")[0]) {
         proxy_http.web(req, res, {target: "http://"+URL});
         flag = true;
     } else {
@@ -64,7 +64,7 @@ https.createServer(options, function(req, res){
     let subdomain = req.headers.host.split(".")[0];
     let flag = false;
 
-    if (subdomain === URL) {
+    if (subdomain === URL.split(".")[0]) {
         proxy_http.web(req, res, {target: "http://"+URL});
         flag = true;
     } else {
