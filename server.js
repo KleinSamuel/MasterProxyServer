@@ -39,7 +39,11 @@ http.createServer(function(req, res) {
     for (let i in config.websites) {
         let website = config.websites[i];
         if (subdomain === website.subdomain) {
-            proxy_http.web(req, res, {target: "http://"+URL+":"+website.port_http});
+            let newUrl = "http://"+URL+":"+website.port_http;
+            if (website.appendix !== undefined){
+                newUrl += "/"+website.appendix;
+            }
+            proxy_http.web(req, res, {target: newUrl});
             flag = true;
             break;
         }
